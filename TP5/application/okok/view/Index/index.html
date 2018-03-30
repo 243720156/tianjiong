@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>七牛云测试</title>
+</head>
+<body>
+表单上传测试
+表单上传需要后台有一个uptoken生成才可以上传文件
+<form method="post" action="http://up.qiniu.com" enctype="multipart/form-data">
+  <input name="token" type="hidden" value="{$upToken}">
+  <input name="file" type="file" />
+  <input type="submit" value="上传"/>
+</form>
+
+
+</body>
+</html>
