@@ -52,8 +52,7 @@ class ZjtjController extends Controller
 
         $phone=$request->input('phone');
         if (empty($email) || empty($phone)) {
-            //return url('Zjtj/index');  
-            return '用户名和手机不能为空';
+            return redirect('/Zjtj/index')->with('error', '用户名和邮箱不能为空');
         }
 
         $userModel=new user();
@@ -69,11 +68,11 @@ class ZjtjController extends Controller
 
         if (!$add) {
             report($add);
-            echo "添加出错";
+            return redirect('/Zjtj/index')->with('error', '保存失败');
+            exit();
         }
 
-
-        return redirect()->back();
+        return redirect('/Zjtj/index')->with('success', '提交成功!');
 
     }
 

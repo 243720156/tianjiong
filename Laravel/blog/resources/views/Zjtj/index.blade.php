@@ -178,12 +178,69 @@
                     <li>
                        <p style="width: 100%">{!! Geetest::render() !!}</p>
                     </li>
-                    
                     <li><button style="width: 100%;height: 50px;border: 2px solid #000;background: #fff;" id="submit">提交</button></li>
                 </ul>
+            
+            <script>
+
+                $('#submit').click(function(){
+                    var username=$('#username').val().length;
+                    var email =$('#email').val().length;
+                    var phone =$('#phone').val();
+                    if (username==0) {
+                        alert('用户名不能为空');
+                        return false;
+                    }
+                    if (email==0) {
+                        alert('邮箱不能为空');
+                        return false;
+                    }
+                    if (phone.length==0) {
+                        alert('电话不能为空');
+                        return false;
+                    }
+                    var pattern = /^1[345678]\d{9}$/; 
+                    var phoneok = pattern.test(phone);
+                    if (!pattern.test(phone)) {
+                        alert("手机号格式错误");
+                        return false;
+                    }; 
+                });
+
+            </script>
 
             </form>
 
+@if(Session::has('success'))
+<div class="alert alert-info"> {{Session::get('success')}} 
+</div> 
+    <script type="text/javascript">
+        var data="{{Session::get('success')}}";
+        alert(data);
+        setTimeout( 
+            function(){
+                $('.alert-info').fadeOut();
+            },
+            6000
+        );
+    </script>
+@endif
+
+@if(Session::has('error'))
+<div class="alert alert-danger"> {{Session::get('error')}} 
+</div> 
+    <script type="text/javascript">
+        var data="{{Session::get('error')}}";
+        alert(data);
+        setTimeout( 
+            function(){
+                $('.alert-danger').fadeOut();
+            },
+            6000
+        );
+    </script>
+
+@endif
 
 
         </div>
